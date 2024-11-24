@@ -14,9 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Button
@@ -78,9 +76,7 @@ class MvcListing : ComponentActivity() {
     @Composable
     fun MainContainer(modifier: Modifier = Modifier) {
         Column(
-            modifier = modifier
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = modifier.fillMaxSize(),
         ) {
             var expenseList: List<MvcExpanse> by remember { mutableStateOf(listOf()) }
 
@@ -90,7 +86,7 @@ class MvcListing : ComponentActivity() {
                 }
             }
             HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-            CreateList(itemList = expenseList){ id->
+            CreateList(itemList = expenseList, modifier = Modifier.weight(1f)) { id ->
                 controller.deleteItem(id) { list ->
                     expenseList = list
                 }
@@ -165,9 +161,11 @@ class MvcListing : ComponentActivity() {
                 items(itemList) {
                     Spacer(modifier = Modifier.height(4.dp))
                     Card {
-                        Row(modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(8.dp), verticalAlignment = Alignment.CenterVertically
+                        ) {
 
                             Column(modifier = Modifier.weight(1f)) {
                                 Heading2(text = it.amount.toString())
