@@ -1,7 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Base.Theme.Architectures" parent="Theme.Material3.DayNight.NoActionBar">
-    </style>
 
-    <style name="Theme.Architectures" parent="Base.Theme.Architectures" >
-    </style>
+    <style name="Base.Theme.Architectures" parent="Theme.Material3.DayNight.NoActionBar"></style>
+
+    <style name="Theme.Architectures" parent="Base.Theme.Architectures"></style>
 </resources>

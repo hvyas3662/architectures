@@ -1,9 +1,10 @@
-package com.hvyas.architectures.mvc.view
+package com.hvyas.architectures.mvi.ui.screen
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -35,25 +36,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
-import com.hvyas.architectures.common.ExpenseDb
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.hvyas.architectures.common.theme.ArchitecturesTheme
 import com.hvyas.architectures.common.theme.component.EditTextCompose
 import com.hvyas.architectures.common.theme.component.Heading1
 import com.hvyas.architectures.common.theme.component.Heading2
 import com.hvyas.architectures.common.theme.component.TextTopBar
-import com.hvyas.architectures.mvc.controller.MvcListingController
-import com.hvyas.architectures.mvc.model.model.MvcExpanse
-import com.hvyas.architectures.mvc.model.repository.MvcExpenseRepository
+import com.hvyas.architectures.mvi.data.domain.MviExpense
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MvcListing : ComponentActivity() {
+class MviActivity : ComponentActivity() {
 
-    private val controller: MvcListingController by lazy {
-        val dao = ExpenseDb.getExpenseDb(this).getMvcExpenseDao()
-        val repository = MvcExpenseRepository(dao)
-        MvcListingController(repository)
-    }
+    private val mviViewModel: MviViewModel by viewModels<MviViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +63,7 @@ class MvcListing : ComponentActivity() {
         }
     }
 
+
     @Composable
     private fun FullScreenScreen() {
         Scaffold(modifier = Modifier.fillMaxSize(), topBar = { CreateToolbar() }) { innerPadding ->
@@ -77,39 +73,33 @@ class MvcListing : ComponentActivity() {
 
     @Composable
     fun MainContainer(modifier: Modifier = Modifier) {
-        Column(
-            modifier = modifier.fillMaxSize(),
-        ) {
-            var expenseList: List<MvcExpanse> by remember { mutableStateOf(listOf()) }
-
-            CreateForm { expense ->
-                controller.saveData(expense) { list ->
-                    expenseList = list
-                }
-            }
-            HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-            CreateList(itemList = expenseList, modifier = Modifier.weight(1f)) { id ->
-                controller.deleteItem(id) { list ->
-                    expenseList = list
-                }
-            }
-            LaunchedEffect(key1 = true) {
-                controller.getData { list ->
-                    expenseList = list
-                }
-            }
+        val uiState: MviUiState by mviViewModel.state.collectAsStateWithLifecycle()
+        var expenseList by remember { mutableStateOf(listOf<MviExpense>()) }
+        when (uiState) {
+            is MviUiState.Success -> expenseList = (uiState as MviUiState.Success).expenseList
+            else -> {}
         }
+
+        Column(modifier = modifier.fillMaxSize()) {
+            CreateForm { expense -> mviViewModel.handleIntent(MviIntent.SaveExpense(expense)) }
+
+            HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+
+            CreateList(modifier = Modifier.weight(1f), expenseList) { id -> mviViewModel.handleIntent(MviIntent.DeleteExpense(id)) }
+        }
+
+        LaunchedEffect(key1 = true) { mviViewModel.handleIntent(MviIntent.LoadExpense) }
     }
 
     @Composable
     private fun CreateToolbar() {
-        TextTopBar(text = "Mvc Example") {
+        TextTopBar(text = "MVI Example") {
             onBackPressedDispatcher.onBackPressed()
         }
     }
 
     @Composable
-    private fun CreateForm(modifier: Modifier = Modifier, onSubmit: (MvcExpanse) -> Unit) {
+    private fun CreateForm(modifier: Modifier = Modifier, onSubmit: (MviExpense) -> Unit) {
         var dateText by remember { mutableStateOf("") }
         var timeText by remember { mutableStateOf("") }
         var amount by remember { mutableStateOf("") }
@@ -143,7 +133,7 @@ class MvcListing : ComponentActivity() {
             }
             Spacer(modifier = Modifier.height(4.dp))
             Button(onClick = {
-                val expanse = MvcExpanse(0, dateText, timeText, amount.toDouble(), remark)
+                val expanse = MviExpense(0, dateText, timeText, amount.toDouble(), remark)
                 dateText = ""
                 timeText = ""
                 amount = ""
@@ -156,11 +146,12 @@ class MvcListing : ComponentActivity() {
     }
 
     @Composable
-    private fun CreateList(modifier: Modifier = Modifier, itemList: List<MvcExpanse>, onDelete: (Int) -> Unit) {
+    private fun CreateList(modifier: Modifier = Modifier, itemList: List<MviExpense>, onDelete: (Int) -> Unit) {
+
         Column(modifier = modifier.padding(horizontal = 16.dp)) {
             Heading1(text = "Listing Form")
             LazyColumn {
-                items(itemList, key = { it.id }) {
+                items(itemList) {
                     Spacer(modifier = Modifier.height(4.dp))
                     Card {
                         Row(
@@ -186,10 +177,9 @@ class MvcListing : ComponentActivity() {
         }
     }
 
-
-    @Preview(device = "spec:width=1080px,height=2340px,dpi=440", backgroundColor = 0xFFF8BBD0)
+    @Preview(showBackground = true)
     @Composable
-    private fun GreetingPreview() {
+    fun GreetingPreview() {
         ArchitecturesTheme {
             FullScreenScreen()
         }
