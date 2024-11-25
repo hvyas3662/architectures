@@ -21,6 +21,7 @@ import com.hvyas.architectures.common.theme.ArchitecturesTheme
 import com.hvyas.architectures.common.theme.component.TextTopBar
 import com.hvyas.architectures.mvc.view.MvcListing
 import com.hvyas.architectures.mvi.ui.screen.MviActivity
+import com.hvyas.architectures.mvvm.ui.screen.MvvmActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                 Text(text = "MVI")
             }
 
-            Button(onClick = { }) {
+            Button(onClick = { navigateToActivity(MvvmActivity::class.java) }) {
                 Text(text = "MVVM")
             }
 

@@ -23,17 +23,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".mvi.ui.screen.MviActivity"
             android:exported="false"
             android:label="@string/title_activity_mvi"
             android:theme="@style/Theme.Architectures" />
-
         <activity
             android:name=".mvc.view.MvcListing"
             android:exported="false"
             android:label="@string/title_activity_mvc_listing"
+            android:theme="@style/Theme.Architectures" />
+        <activity
+            android:name=".mvvm.ui.screen.MvvmActivity"
+            android:exported="false"
+            android:label="@string/title_activity_mvvm"
             android:theme="@style/Theme.Architectures" />
     </application>
 

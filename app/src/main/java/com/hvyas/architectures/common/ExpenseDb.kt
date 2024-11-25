@@ -8,12 +8,15 @@ import com.hvyas.architectures.mvc.model.dao.MvcExpenseDao
 import com.hvyas.architectures.mvc.model.model.MvcExpanse
 import com.hvyas.architectures.mvi.data.dao.MviExpenseDao
 import com.hvyas.architectures.mvi.data.domain.MviExpense
+import com.hvyas.architectures.mvvm.data.dao.MvvmExpenseDao
+import com.hvyas.architectures.mvvm.data.model.MvvmExpense
 
-@Database(entities = [MvcExpanse::class, MviExpense::class], version = 2)
+@Database(entities = [MvcExpanse::class, MviExpense::class, MvvmExpense::class], version = 3)
 abstract class ExpenseDb : RoomDatabase() {
 
     abstract fun getMvcExpenseDao(): MvcExpenseDao
     abstract fun getMviExpenseDao(): MviExpenseDao
+    abstract fun getMvvmExpenseDao(): MvvmExpenseDao
 
     companion object {
         @Volatile
@@ -22,7 +25,7 @@ abstract class ExpenseDb : RoomDatabase() {
         fun getExpenseDb(context: Context): ExpenseDb = instance ?: synchronized(this) {
             if (instance == null) {
                 instance = Room.databaseBuilder(context.applicationContext, ExpenseDb::class.java, "Expense_db")
-                    .fallbackToDestructiveMigrationFrom()
+                    .fallbackToDestructiveMigration()
                     .build()
             }
             instance!!

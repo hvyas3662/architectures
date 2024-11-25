@@ -4,6 +4,8 @@ import android.content.Context
 import com.hvyas.architectures.common.ExpenseDb
 import com.hvyas.architectures.mvi.data.dao.MviExpenseDao
 import com.hvyas.architectures.mvi.data.repository.MviExpenseRepository
+import com.hvyas.architectures.mvvm.data.dao.MvvmExpenseDao
+import com.hvyas.architectures.mvvm.data.repository.MvvmExpenseRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,10 +23,18 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideExpenseDao(expenseDb: ExpenseDb) = expenseDb.getMviExpenseDao()
+    fun provideMviExpenseDao(expenseDb: ExpenseDb) = expenseDb.getMviExpenseDao()
 
     @Singleton
     @Provides
     fun provideMviExpenseRepository(expenseDao: MviExpenseDao) = MviExpenseRepository(expenseDao)
+
+    @Singleton
+    @Provides
+    fun provideMvvmExpenseDao(expenseDb: ExpenseDb) = expenseDb.getMvvmExpenseDao()
+
+    @Singleton
+    @Provides
+    fun provideMvvmExpenseRepository(expenseDao: MvvmExpenseDao) = MvvmExpenseRepository(expenseDao)
 
 }

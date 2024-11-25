@@ -2,4 +2,5 @@
     <string name="app_name">architectures</string>
     <string name="title_activity_mvc_listing">MvcListing</string>
     <string name="title_activity_mvi">MviActivity</string>
+    <string name="title_activity_mvvm">MvvmActivity</string>
 </resources>
