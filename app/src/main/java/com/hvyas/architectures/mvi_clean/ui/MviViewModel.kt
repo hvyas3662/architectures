@@ -1,4 +1,4 @@
-package com.hvyas.architectures.mvi_clean.ui.screen
+package com.hvyas.architectures.mvi_clean.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

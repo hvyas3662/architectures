@@ -1,4 +1,4 @@
-package com.hvyas.architectures.mvi_clean.ui.screen
+package com.hvyas.architectures.mvi_clean.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

@@ -1,4 +1,4 @@
-package com.hvyas.architectures.mvi_clean.ui.screen
+package com.hvyas.architectures.mvi_clean.ui
 
 import com.hvyas.architectures.common.LoadingType
 import com.hvyas.architectures.mvi.data.domain.MviExpense

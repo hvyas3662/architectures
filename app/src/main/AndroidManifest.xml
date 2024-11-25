@@ -49,7 +49,7 @@
             android:theme="@style/Theme.Architectures" />
 
         <activity
-            android:name=".mvi_clean.ui.screen.MviActivity"
+            android:name=".mvi_clean.ui.MviActivity"
             android:exported="false"
             android:label="@string/title_activity_mvvm"
             android:theme="@style/Theme.Architectures" />
