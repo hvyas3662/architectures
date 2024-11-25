@@ -22,7 +22,7 @@ import com.hvyas.architectures.common.theme.component.TextTopBar
 import com.hvyas.architectures.mvc.view.MvcListing
 import com.hvyas.architectures.mvi.ui.screen.MviActivity
 import com.hvyas.architectures.mvvm.ui.screen.MvvmActivity
-import com.hvyas.architectures.mvvm_clean.domain.model.CleanMvvmExpense
+import com.hvyas.architectures.mvvm_clean.ui.CleanMvvmActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
                 Text(text = "MVVM")
             }
 
-            Button(onClick = { navigateToActivity(CleanMvvmExpense::class.java) }) {
+            Button(onClick = { navigateToActivity(CleanMvvmActivity::class.java) }) {
                 Text(text = "Clean+MVVM")
             }
         }
