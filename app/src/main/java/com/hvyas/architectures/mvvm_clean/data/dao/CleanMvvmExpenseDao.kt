@@ -12,9 +12,9 @@ interface CleanMvvmExpenseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(mvvmExpense: CleanMvvmExpenseDto): Long
 
-    @Query("select * from MvvmExpense where 1 order by id desc")
+    @Query("select * from CleanMvvmExpense where 1 order by id desc")
     fun getAllExpense(): Flow<List<CleanMvvmExpenseDto>>
 
-    @Query("Delete from MvvmExpense where id= :id")
+    @Query("Delete from CleanMvvmExpense where id= :id")
     suspend fun deleteItem(id: Int): Int
 }
