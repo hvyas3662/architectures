@@ -8,18 +8,21 @@ import com.hvyas.architectures.mvc.model.dao.MvcExpenseDao
 import com.hvyas.architectures.mvc.model.model.MvcExpanse
 import com.hvyas.architectures.mvi.data.dao.MviExpenseDao
 import com.hvyas.architectures.mvi.data.domain.MviExpense
+import com.hvyas.architectures.mvi_clean.data.dao.CleanMviExpenseDao
+import com.hvyas.architectures.mvi_clean.data.dto.CleanMviExpenseDto
 import com.hvyas.architectures.mvvm.data.dao.MvvmExpenseDao
 import com.hvyas.architectures.mvvm.data.model.MvvmExpense
 import com.hvyas.architectures.mvvm_clean.data.dao.CleanMvvmExpenseDao
 import com.hvyas.architectures.mvvm_clean.data.dto.CleanMvvmExpenseDto
 
-@Database(entities = [MvcExpanse::class, MviExpense::class, MvvmExpense::class, CleanMvvmExpenseDto::class], version = 4)
+@Database(entities = [MvcExpanse::class, MviExpense::class, MvvmExpense::class, CleanMvvmExpenseDto::class, CleanMviExpenseDto::class], version = 5)
 abstract class ExpenseDb : RoomDatabase() {
 
     abstract fun getMvcExpenseDao(): MvcExpenseDao
     abstract fun getMviExpenseDao(): MviExpenseDao
     abstract fun getMvvmExpenseDao(): MvvmExpenseDao
     abstract fun getCleanMvvmExpenseDao(): CleanMvvmExpenseDao
+    abstract fun getCleanMviExpenseDao(): CleanMviExpenseDao
 
     companion object {
         @Volatile

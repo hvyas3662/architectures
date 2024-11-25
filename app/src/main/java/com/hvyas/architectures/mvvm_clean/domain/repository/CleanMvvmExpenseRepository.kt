@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface CleanMvvmExpenseRepository {
 
-    suspend fun insertExpense(mvvmExpense: CleanMvvmExpense): Boolean
+    suspend fun insertExpense(cleanMvvmExpense: CleanMvvmExpense): Boolean
 
     fun getAllData(): Flow<List<CleanMvvmExpense>>
 

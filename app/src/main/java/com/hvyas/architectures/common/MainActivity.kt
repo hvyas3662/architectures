@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                 Text(text = "Clean+MVVM")
             }
 
-            Button(onClick = { navigateToActivity(com.hvyas.architectures.mvi_clean.ui.MviActivity::class.java) }) {
+            Button(onClick = { navigateToActivity(com.hvyas.architectures.mvi_clean.ui.CleanMviActivity::class.java) }) {
                 Text(text = "Clean+MVI")
             }
         }

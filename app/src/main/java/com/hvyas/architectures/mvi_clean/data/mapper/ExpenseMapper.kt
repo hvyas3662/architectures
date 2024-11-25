@@ -1,8 +1,8 @@
-package com.hvyas.architectures.mvvm_clean.data.mapper
+package com.hvyas.architectures.mvi_clean.data.mapper
 
-import com.hvyas.architectures.mvvm_clean.data.dto.CleanMvvmExpenseDto
-import com.hvyas.architectures.mvvm_clean.domain.model.CleanMvvmExpense
+import com.hvyas.architectures.mvi_clean.data.dto.CleanMviExpenseDto
+import com.hvyas.architectures.mvi_clean.domain.model.CleanMviExpense
 
-fun CleanMvvmExpense.toDto() = CleanMvvmExpenseDto(id, date, time, amount, message)
+fun CleanMviExpense.toDto() = CleanMviExpenseDto(id, date, time, amount, message)
 
-fun CleanMvvmExpenseDto.toModel() = CleanMvvmExpense(id, date, time, amount, message)
+fun CleanMviExpenseDto.toModel() = CleanMviExpense(id, date, time, amount, message)

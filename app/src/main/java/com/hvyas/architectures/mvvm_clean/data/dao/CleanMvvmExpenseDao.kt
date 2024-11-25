@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CleanMvvmExpenseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(mvvmExpense: CleanMvvmExpenseDto): Long
+    suspend fun insert(cleanMvvmExpense: CleanMvvmExpenseDto): Long
 
     @Query("select * from CleanMvvmExpense where 1 order by id desc")
     fun getAllExpense(): Flow<List<CleanMvvmExpenseDto>>

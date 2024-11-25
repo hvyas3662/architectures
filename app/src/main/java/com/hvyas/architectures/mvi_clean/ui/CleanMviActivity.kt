@@ -42,13 +42,13 @@ import com.hvyas.architectures.common.theme.component.EditTextCompose
 import com.hvyas.architectures.common.theme.component.Heading1
 import com.hvyas.architectures.common.theme.component.Heading2
 import com.hvyas.architectures.common.theme.component.TextTopBar
-import com.hvyas.architectures.mvi.data.domain.MviExpense
+import com.hvyas.architectures.mvi_clean.domain.model.CleanMviExpense
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MviActivity : ComponentActivity() {
+class CleanMviActivity : ComponentActivity() {
 
-    private val mviViewModel: MviViewModel by viewModels<MviViewModel>()
+    private val cleanMviViewModel: CleanMviViewModel by viewModels<CleanMviViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,22 +73,22 @@ class MviActivity : ComponentActivity() {
 
     @Composable
     fun MainContainer(modifier: Modifier = Modifier) {
-        val uiState: MviUiState by mviViewModel.state.collectAsStateWithLifecycle()
-        var expenseList by remember { mutableStateOf(listOf<MviExpense>()) }
+        val uiState: CleanMviUiState by cleanMviViewModel.state.collectAsStateWithLifecycle()
+        var expenseList by remember { mutableStateOf(listOf<CleanMviExpense>()) }
         when (uiState) {
-            is MviUiState.Success -> expenseList = (uiState as MviUiState.Success).expenseList
+            is CleanMviUiState.Success -> expenseList = (uiState as CleanMviUiState.Success).expenseList
             else -> {}
         }
 
         Column(modifier = modifier.fillMaxSize()) {
-            CreateForm { expense -> mviViewModel.handleIntent(MviIntent.SaveExpense(expense)) }
+            CreateForm { expense -> cleanMviViewModel.handleIntent(CleanMviIntent.SaveExpense(expense)) }
 
             HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
 
-            CreateList(modifier = Modifier.weight(1f), expenseList) { id -> mviViewModel.handleIntent(MviIntent.DeleteExpense(id)) }
+            CreateList(modifier = Modifier.weight(1f), expenseList) { id -> cleanMviViewModel.handleIntent(CleanMviIntent.DeleteExpense(id)) }
         }
 
-        LaunchedEffect(key1 = true) { mviViewModel.handleIntent(MviIntent.LoadExpense) }
+        LaunchedEffect(key1 = true) { cleanMviViewModel.handleIntent(CleanMviIntent.LoadExpense) }
     }
 
     @Composable
@@ -99,7 +99,7 @@ class MviActivity : ComponentActivity() {
     }
 
     @Composable
-    private fun CreateForm(modifier: Modifier = Modifier, onSubmit: (MviExpense) -> Unit) {
+    private fun CreateForm(modifier: Modifier = Modifier, onSubmit: (CleanMviExpense) -> Unit) {
         var dateText by remember { mutableStateOf("") }
         var timeText by remember { mutableStateOf("") }
         var amount by remember { mutableStateOf("") }
@@ -133,7 +133,7 @@ class MviActivity : ComponentActivity() {
             }
             Spacer(modifier = Modifier.height(4.dp))
             Button(onClick = {
-                val expanse = MviExpense(0, dateText, timeText, amount.toDouble(), remark)
+                val expanse = CleanMviExpense(0, dateText, timeText, amount.toDouble(), remark)
                 dateText = ""
                 timeText = ""
                 amount = ""
@@ -146,7 +146,7 @@ class MviActivity : ComponentActivity() {
     }
 
     @Composable
-    private fun CreateList(modifier: Modifier = Modifier, itemList: List<MviExpense>, onDelete: (Int) -> Unit) {
+    private fun CreateList(modifier: Modifier = Modifier, itemList: List<CleanMviExpense>, onDelete: (Int) -> Unit) {
 
         Column(modifier = modifier.padding(horizontal = 16.dp)) {
             Heading1(text = "Listing Form")

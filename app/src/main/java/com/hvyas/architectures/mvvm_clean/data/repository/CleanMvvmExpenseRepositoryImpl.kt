@@ -10,11 +10,11 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class CleanMvvmExpenseRepositoryImpl @Inject constructor(private val mvvmExpenseDao: CleanMvvmExpenseDao) : CleanMvvmExpenseRepository {
+class CleanMvvmExpenseRepositoryImpl @Inject constructor(private val cleanMvvmExpenseDao: CleanMvvmExpenseDao) : CleanMvvmExpenseRepository {
 
-    override suspend fun insertExpense(mvvmExpense: CleanMvvmExpense): Boolean = mvvmExpenseDao.insert(mvvmExpense.toDto()) > 0
+    override suspend fun insertExpense(cleanMvvmExpense: CleanMvvmExpense): Boolean = cleanMvvmExpenseDao.insert(cleanMvvmExpense.toDto()) > 0
 
-    override fun getAllData() = mvvmExpenseDao.getAllExpense().map { list -> list.map { it.toModel() } }.flowOn(Dispatchers.IO)
+    override fun getAllData() = cleanMvvmExpenseDao.getAllExpense().map { list -> list.map { it.toModel() } }.flowOn(Dispatchers.IO)
 
-    override suspend fun deleteExpense(id: Int) = mvvmExpenseDao.deleteItem(id) > 0
+    override suspend fun deleteExpense(id: Int) = cleanMvvmExpenseDao.deleteItem(id) > 0
 }

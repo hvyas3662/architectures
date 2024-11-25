@@ -4,6 +4,9 @@ import android.content.Context
 import com.hvyas.architectures.common.ExpenseDb
 import com.hvyas.architectures.mvi.data.dao.MviExpenseDao
 import com.hvyas.architectures.mvi.data.repository.MviExpenseRepository
+import com.hvyas.architectures.mvi_clean.data.dao.CleanMviExpenseDao
+import com.hvyas.architectures.mvi_clean.data.repository.CleanMviExpenseRepositoryImpl
+import com.hvyas.architectures.mvi_clean.domain.repository.CleanMviExpenseRepository
 import com.hvyas.architectures.mvvm.data.dao.MvvmExpenseDao
 import com.hvyas.architectures.mvvm.data.repository.MvvmExpenseRepository
 import com.hvyas.architectures.mvvm_clean.data.dao.CleanMvvmExpenseDao
@@ -47,5 +50,13 @@ object AppModule {
     @Singleton
     @Provides
     fun provideCleanMvvmExpenseRepository(expenseDao: CleanMvvmExpenseDao): CleanMvvmExpenseRepository = CleanMvvmExpenseRepositoryImpl(expenseDao)
+
+    @Singleton
+    @Provides
+    fun provideCleanMviExpenseDao(expenseDb: ExpenseDb): CleanMviExpenseDao = expenseDb.getCleanMviExpenseDao()
+
+    @Singleton
+    @Provides
+    fun provideCleanMviExpenseRepository(expenseDao: CleanMviExpenseDao): CleanMviExpenseRepository = CleanMviExpenseRepositoryImpl(expenseDao)
 
 }

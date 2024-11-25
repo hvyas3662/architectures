@@ -48,7 +48,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CleanMvvmActivity : ComponentActivity() {
 
-    private val mvvmViewModel: CleanMvvmViewModel by viewModels<CleanMvvmViewModel>()
+    private val cleanMvvmViewModel: CleanMvvmViewModel by viewModels<CleanMvvmViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,17 +72,17 @@ class CleanMvvmActivity : ComponentActivity() {
 
     @Composable
     fun MainContainer(modifier: Modifier = Modifier) {
-        val expenseList by mvvmViewModel.state.collectAsStateWithLifecycle()
+        val expenseList by cleanMvvmViewModel.state.collectAsStateWithLifecycle()
 
         Column(modifier = modifier.fillMaxSize()) {
-            CreateForm { expense -> mvvmViewModel.saveExpense(expense) }
+            CreateForm { expense -> cleanMvvmViewModel.saveExpense(expense) }
 
             HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
 
-            CreateList(modifier = Modifier.weight(1f), expenseList) { id -> mvvmViewModel.delete(id) }
+            CreateList(modifier = Modifier.weight(1f), expenseList) { id -> cleanMvvmViewModel.delete(id) }
         }
 
-        LaunchedEffect(key1 = true) { mvvmViewModel.loadExpense() }
+        LaunchedEffect(key1 = true) { cleanMvvmViewModel.loadExpense() }
     }
 
     @Composable
