@@ -46,9 +46,9 @@ import com.hvyas.architectures.mvvm_clean.data.dto.CleanMvvmExpense
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MvvmActivity : ComponentActivity() {
+class CleanMvvmActivity : ComponentActivity() {
 
-    private val mvvmViewModel: com.hvyas.architectures.mvvm_clean.ui.MvvmViewModel by viewModels<com.hvyas.architectures.mvvm_clean.ui.MvvmViewModel>()
+    private val mvvmViewModel: CleanMvvmViewModel by viewModels<CleanMvvmViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

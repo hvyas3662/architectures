@@ -3,7 +3,7 @@ package com.hvyas.architectures.mvvm_clean.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hvyas.architectures.mvvm_clean.data.dto.CleanMvvmExpense
-import com.hvyas.architectures.mvvm_clean.data.repository.MvvmExpenseRepository
+import com.hvyas.architectures.mvvm_clean.data.repository.CleanMvvmExpenseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MvvmViewModel @Inject constructor(private val mvvmExpenseRepository: MvvmExpenseRepository) : ViewModel() {
+class CleanMvvmViewModel @Inject constructor(private val mvvmExpenseRepository: CleanMvvmExpenseRepository) : ViewModel() {
 
     private val _state: MutableStateFlow<List<CleanMvvmExpense>> = MutableStateFlow(emptyList())
     val state = _state.asStateFlow()

@@ -39,7 +39,7 @@
             android:label="@string/title_activity_mvvm"
             android:theme="@style/Theme.Architectures" />
         <activity
-            android:name=".mvvm_clean.ui.MvvmActivity"
+            android:name=".mvvm_clean.ui.CleanMvvmActivity"
             android:exported="false"
             android:label="@string/title_activity_mvvm"
             android:theme="@style/Theme.Architectures" />
