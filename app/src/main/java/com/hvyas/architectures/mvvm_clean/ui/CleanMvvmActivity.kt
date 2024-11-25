@@ -42,7 +42,7 @@ import com.hvyas.architectures.common.theme.component.EditTextCompose
 import com.hvyas.architectures.common.theme.component.Heading1
 import com.hvyas.architectures.common.theme.component.Heading2
 import com.hvyas.architectures.common.theme.component.TextTopBar
-import com.hvyas.architectures.mvvm_clean.data.dto.CleanMvvmExpense
+import com.hvyas.architectures.mvvm_clean.domain.model.CleanMvvmExpense
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -87,7 +87,7 @@ class CleanMvvmActivity : ComponentActivity() {
 
     @Composable
     private fun CreateToolbar() {
-        TextTopBar(text = "MVVM Example") {
+        TextTopBar(text = "Clean+MVVM Example") {
             onBackPressedDispatcher.onBackPressed()
         }
     }

@@ -10,13 +10,16 @@ import com.hvyas.architectures.mvi.data.dao.MviExpenseDao
 import com.hvyas.architectures.mvi.data.domain.MviExpense
 import com.hvyas.architectures.mvvm.data.dao.MvvmExpenseDao
 import com.hvyas.architectures.mvvm.data.model.MvvmExpense
+import com.hvyas.architectures.mvvm_clean.data.dao.CleanMvvmExpenseDao
+import com.hvyas.architectures.mvvm_clean.data.dto.CleanMvvmExpenseDto
 
-@Database(entities = [MvcExpanse::class, MviExpense::class, MvvmExpense::class], version = 3)
+@Database(entities = [MvcExpanse::class, MviExpense::class, MvvmExpense::class, CleanMvvmExpenseDto::class], version = 4)
 abstract class ExpenseDb : RoomDatabase() {
 
     abstract fun getMvcExpenseDao(): MvcExpenseDao
     abstract fun getMviExpenseDao(): MviExpenseDao
     abstract fun getMvvmExpenseDao(): MvvmExpenseDao
+    abstract fun getCleanMvvmExpenseDao(): CleanMvvmExpenseDao
 
     companion object {
         @Volatile

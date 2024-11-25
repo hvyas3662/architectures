@@ -6,6 +6,8 @@ import com.hvyas.architectures.mvi.data.dao.MviExpenseDao
 import com.hvyas.architectures.mvi.data.repository.MviExpenseRepository
 import com.hvyas.architectures.mvvm.data.dao.MvvmExpenseDao
 import com.hvyas.architectures.mvvm.data.repository.MvvmExpenseRepository
+import com.hvyas.architectures.mvvm_clean.data.dao.CleanMvvmExpenseDao
+import com.hvyas.architectures.mvvm_clean.data.repository.CleanMvvmExpenseRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,5 +38,13 @@ object AppModule {
     @Singleton
     @Provides
     fun provideMvvmExpenseRepository(expenseDao: MvvmExpenseDao) = MvvmExpenseRepository(expenseDao)
+
+    @Singleton
+    @Provides
+    fun provideCleanMvvmExpenseDao(expenseDb: ExpenseDb) = expenseDb.getCleanMvvmExpenseDao()
+
+    @Singleton
+    @Provides
+    fun provideCleanMvvmExpenseRepository(expenseDao: CleanMvvmExpenseDao) = CleanMvvmExpenseRepositoryImpl(expenseDao)
 
 }

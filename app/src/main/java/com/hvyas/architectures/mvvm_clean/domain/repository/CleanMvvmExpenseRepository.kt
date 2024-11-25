@@ -1,6 +1,6 @@
 package com.hvyas.architectures.mvvm_clean.domain.repository
 
-import com.hvyas.architectures.mvvm_clean.data.dto.CleanMvvmExpense
+import com.hvyas.architectures.mvvm_clean.domain.model.CleanMvvmExpense
 import kotlinx.coroutines.flow.Flow
 
 interface CleanMvvmExpenseRepository {

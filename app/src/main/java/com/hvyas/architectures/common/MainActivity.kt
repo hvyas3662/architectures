@@ -22,12 +22,13 @@ import com.hvyas.architectures.common.theme.component.TextTopBar
 import com.hvyas.architectures.mvc.view.MvcListing
 import com.hvyas.architectures.mvi.ui.screen.MviActivity
 import com.hvyas.architectures.mvvm.ui.screen.MvvmActivity
+import com.hvyas.architectures.mvvm_clean.domain.model.CleanMvvmExpense
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        WindowCompat.getInsetsController(window, window.decorView).apply{
+        WindowCompat.getInsetsController(window, window.decorView).apply {
             isAppearanceLightStatusBars = false
         }
         setContent {
@@ -55,7 +56,7 @@ class MainActivity : AppCompatActivity() {
                 Text(text = "MVVM")
             }
 
-            Button(onClick = { }) {
+            Button(onClick = { navigateToActivity(CleanMvvmExpense::class.java) }) {
                 Text(text = "Clean+MVVM")
             }
         }
