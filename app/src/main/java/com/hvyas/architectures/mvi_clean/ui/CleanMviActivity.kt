@@ -93,7 +93,7 @@ class CleanMviActivity : ComponentActivity() {
 
     @Composable
     private fun CreateToolbar() {
-        TextTopBar(text = "MVI Example") {
+        TextTopBar(text = "Clean+MVI Example") {
             onBackPressedDispatcher.onBackPressed()
         }
     }
